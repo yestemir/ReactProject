@@ -11,18 +11,24 @@ import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import {cart} from "./database/cart";
 import {ThemeContext} from "../src/components/contexts/ThemeProvider";
+import {LanguageContext} from "./components/contexts/LanguageProvider";
 
 function App() {
     const { theme, toggleTheme } = useContext(ThemeContext);
+    const { language, toggleLanguage } = useContext(LanguageContext);
   return (
       <Router>
           <Navbar />
           <div>
-          <div>Hi friend!</div>
+              <button onClick={toggleLanguage}>
+                  Switch to {language === 'EN' ? 'RU' : 'EN'} mode
+              </button>
+          </div>
+          <div>
           <button onClick={toggleTheme}>
               Switch to {theme === 'light' ? 'dark' : 'light'} mode
           </button>
-      </div>
+          </div>
           <Switch>
               <Route exact path='/'><Main /></Route>
               <Route exact path='/store'><Store item={products}/></Route>

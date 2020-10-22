@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {ThemeProvider} from "./components/contexts/ThemeProvider";
+import {LanguageContext, LanguageProvider} from "./components/contexts/LanguageProvider";
 
 ReactDOM.render(
     <ThemeProvider>
-    <App />
+        <LanguageProvider>
+                <App />
+            </LanguageProvider>
     </ThemeProvider>,
   document.getElementById('root')
 );
