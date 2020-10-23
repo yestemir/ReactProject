@@ -9,24 +9,32 @@ interface Props {
 }
 
 const ProductImage = styled.img`
-  width: 10%;
-  height: 10%;
+  width: 50%;
+  height: 50%;
   object-fit: contain;
   object-position: center;
 `;
 
 export default function ProductDetails({}: Props): ReactElement {
     const match = useRouteMatch<{ id: string }>();
-    // const a = match.params;
-    const item = (products.find(product => product.id.toString() === match.params.id) || products[0]) ;
+    const item = (products.find(product => product.id === parseInt(match.params.id)) || products[0]) ;
+    console.log(parseInt(match.params.id))
 
     return (
+        <section id="store" className="store py-5" style={{background: "transparent"}}>
+            <div className="container" >
             <div>
-                <div className='productFigure'>
+                <div key={item.id} className='productFigure'>
                     <h1>{item.name}</h1>
                     <ProductImage src={item.image} />
+                    <h5>Description: {item.description}</h5>
+                    <h5>Price: {item.price}</h5>
+                    <h5>Cook: {item.brand}</h5>
+
                 </div>
             </div>
+            </div>
+        </section>
         );
 }
 

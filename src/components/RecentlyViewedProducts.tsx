@@ -10,8 +10,8 @@ interface Props {
 }
 
 const ProductImage = styled.img`
-  width: 10%;
-  height: 10%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center;
 `;
@@ -24,14 +24,15 @@ export default function RecentlyViewedProducts(props: Props): ReactElement {
     });
 
     return (
-        <div className='container'>
+
+        <div className='container' >
             <h1> You recently interested products</h1>
             { items.map( (item) => {
                 return(
-                    <div>
+                    <div style={{display: "inline-block", width: "200px", height: "200px", margin: "20px"}}>
                         <ProductImage src={item.image} />
                         <Link to={'/items/' + item.id}>  <div className='cartListItemName'>{item.name}</div></Link>
-                        <div className='cartListItemPrice'>{item.price}</div>
+                        <div className='cartListItemPrice'>$ {item.price}</div>
                     </div>
                 )
             }) }

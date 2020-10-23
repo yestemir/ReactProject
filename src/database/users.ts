@@ -6,5 +6,6 @@ export const users: User[] = [
         name: "Dina",
         email: "d",
         password: "d",
+        basket: [],
     }
 ];
