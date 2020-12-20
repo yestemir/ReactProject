@@ -24,6 +24,7 @@ export default class Store extends Component<Props, State> {
     }
 
     render() {
+        console.log(JSON.stringify(this.state.item));
         return (
             <>
                 <section id="store" className="store py-5">

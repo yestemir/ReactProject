@@ -17,32 +17,35 @@ import StoreComponent from "./components/StoreComponent";
 
 const user: User = {
   id: 1,
-  name: 'Успеть за 2 дня',
-  email: 'asd@asd.asd',
-  password: 'asdasd',
-  basket: []
+  name: "Успеть за 2 дня",
+  email: "asd@asd.asd",
+  password: "asdasd",
+  basket: [],
 };
 
 const Store = lazy(() => import("./components/Store"));
 const Cart = lazy(() => import("./components/Cart"));
 const Auth = lazy(() => import("./components/authorization/Auth"));
-const Registration = lazy(() => import("./components/authorization/Registration"));
+const Registration = lazy(
+  () => import("./components/authorization/Registration")
+);
 const Main = lazy(() => import("./components/Main"));
 const Profile = lazy(() => import("./components/Profile"));
 const ProductDetails = lazy(() => import("./components/ProductDetails"));
+const Orders = lazy(() => import("./components/Orders"));
 
 function App() {
   const [users, setUsers] = useState<User[]>([user]);
   const [loggedUser, setLoggedUser] = useState<User | null>(null);
 
   const callbackFunction = (
-      id: string,
-      phase: "mount" | "update",
-      actualDuration: number,
-      baseDuration: number,
-      startTime: number,
-      commitTime: number,
-      interactions: Set<{ id: number; name: string; timestamp: number }>
+    id: string,
+    phase: "mount" | "update",
+    actualDuration: number,
+    baseDuration: number,
+    startTime: number,
+    commitTime: number,
+    interactions: Set<{ id: number; name: string; timestamp: number }>
   ) => {
     console.log("Id is :", id);
     console.log("Phase is :", phase);
@@ -59,49 +62,50 @@ function App() {
         <Router>
           <Navbar curUser={loggedUser} logout={logout} />
           <Suspense fallback={<h1>Loading Route ...</h1>}>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/main"/>
-            </Route>
-            {/*<Route path="/store" exact component={Store} />*/}
-            <Route exact path="/store">
-              <ErrorBoundary>
-              {/*<Store item={products} addItem={addItemToBasket} />*/}
-                <StoreComponent fetchUrl="store" addItem={addItemToBasket} />
-              </ErrorBoundary>
-            </Route>
-            {/*<Route path="/cart" exact component={Cart} />*/}
-            <Route exact path="/cart">
-              <Profiler id="Cart" onRender={callbackFunction}>
-                <Cart user={loggedUser} removeItem={removeItemFromBasket} />
-                {/*<Cart user={loggedUser} />*/}
-              </Profiler>
-            </Route>
-            {/*<Route path="/auth" exact component={Auth} />*/}
-            <Route
-              exact
-              path="/auth">
-              <Auth login={authenticateUser} cancel={show} />
-            </Route>
-            {/*<Route path="/register" exact component={Registration} />*/}
-            <Route exact path="/register">
-              <Registration registrate={createNewUser} cancel={show} />
-            </Route>
-            {/*<Route path="/main" exact component={Main} />*/}
-            <Route exact path="/main">
-              <Main />
-            </Route>
-            {/*<Route path="/profile" exact component={Profile}  />*/}
-            <Route exact path="/profile">
-              <Profile curUser={loggedUser} />
-            </Route>
-            {/*<Route path="/items/:id" exact component={ProductDetails} />*/}
-            <Route exact path="/items/:id">
-              <ErrorBoundary>
-                <ProductDetails item={products} addItem={addItemToBasket}/>
-              </ErrorBoundary>
-            </Route>
-          </Switch>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/main" />
+              </Route>
+              {/*<Route path="/store" exact component={Store} />*/}
+              <Route exact path="/store">
+                <ErrorBoundary>
+                  {/* <Store item={products} addItem={addItemToBasket} /> */}
+                  <StoreComponent addItem={addItemToBasket} />
+                </ErrorBoundary>
+              </Route>
+              {/*<Route path="/cart" exact component={Cart} />*/}
+              <Route exact path="/cart">
+                <Profiler id="Cart" onRender={callbackFunction}>
+                  <Cart user={loggedUser} removeItem={removeItemFromBasket} clearBasket={clearBasket}/>
+                  {/*<Cart user={loggedUser} />*/}
+                </Profiler>
+              </Route>
+              <Route exact path="/orders">
+                <Orders />
+              </Route>
+              {/*<Route path="/auth" exact component={Auth} />*/}
+              <Route exact path="/auth">
+                <Auth login={authenticateUser} cancel={show} />
+              </Route>
+              {/*<Route path="/register" exact component={Registration} />*/}
+              <Route exact path="/register">
+                <Registration registrate={createNewUser} cancel={show} />
+              </Route>
+              {/*<Route path="/main" exact component={Main} />*/}
+              <Route exact path="/main">
+                <Main />
+              </Route>
+              {/*<Route path="/profile" exact component={Profile}  />*/}
+              <Route exact path="/profile">
+                <Profile curUser={loggedUser} />
+              </Route>
+              {/*<Route path="/items/:id" exact component={ProductDetails} />*/}
+              <Route exact path="/items/:id">
+                <ErrorBoundary>
+                  <ProductDetails item={products} addItem={addItemToBasket} />
+                </ErrorBoundary>
+              </Route>
+            </Switch>
           </Suspense>
         </Router>
       </LanguageContext.Provider>
@@ -145,19 +149,28 @@ function App() {
     if (loggedUser) {
       product.id = loggedUser.basket.length + 1;
       loggedUser.basket.push(product);
-    }else{
+    } else {
       throw new Error("You are not logged in");
     }
   }
 
   function removeItemFromBasket(id: number) {
     if (loggedUser) {
-      console.log('Updated');
+      console.log("Updated");
       const basket = loggedUser.basket.filter((item, index) => {
         return id !== index;
       });
 
-      setLoggedUser({...loggedUser, basket});
+      setLoggedUser({ ...loggedUser, basket });
+    }
+  }
+
+  function clearBasket() {
+    if (loggedUser) {
+      console.log("Updated");
+      const basket: Array<Product> = [];
+
+      setLoggedUser({ ...loggedUser, basket });
     }
   }
 }

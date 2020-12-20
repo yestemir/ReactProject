@@ -4,19 +4,19 @@ import {Product} from "../database/Product";
 import ProductItem from "./ProductItem";
 import RecentlyViewedProducts from "./RecentlyViewedProducts";
 import {recent} from "../database/recent";
+import { getProducts } from '../api/products';
 import './store.css';
 
 interface Props {
-    fetchUrl: string;
     addItem: (it: Product) => void;
 }
 
-export default function StoreComponent({ fetchUrl, addItem }: Props): ReactElement {
+export default function StoreComponent({ addItem }: Props): ReactElement {
     const [data, setData] = useState<Product[]>([]);
 
     useEffect(() => {
         async function fetchData() {
-            const result = await axios.get(fetchUrl);
+            const result = await getProducts();
             console.log(result);
             setData([...result.data]);
         }
