@@ -47,7 +47,7 @@ function Cart({ user, removeItem }: Props): ReactElement {
 
   return (
       <React.Fragment>
-          <h1>Shopping Cart</h1>
+          <h1 id='title'>Shopping Cart</h1>
           <div className="shopping-cart" id="strt">
 
               <div className="column-labels">

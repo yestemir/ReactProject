@@ -11,13 +11,13 @@
     object-position: center;
 }
 
-body {
-    background-image: url("https://de-production.imgix.net/colors/browser/dew344.jpg?fit=fill&bg=ffffff&fm=jpeg&auto=format&lossless=1");
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-}
+/*body {*/
+/*    background-image: url("https://de-production.imgix.net/colors/browser/dew344.jpg?fit=fill&bg=ffffff&fm=jpeg&auto=format&lossless=1");*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    margin: 0;*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*}*/
 
 #main {
     height: 1000%;

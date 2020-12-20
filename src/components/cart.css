@@ -1,11 +1,20 @@
-/*#product-image {*/
-/*    width: 10%;*/
-/*    height: 10%;*/
-/*    !*object-fit: contain;*!*/
-/*    object-position: center;*/
-/*}*/
-h1 {
+#product-image {
+    width: 100%;
+    height: 100%;
+    /*object-fit: contain;*/
+    object-position: center;
+}
+
+#strt {
+
+    padding: 0px 30px 30px 20px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 100;
+}
+
+#title {
     margin-top: 8%;
+    font-weight: 100;
 }
 
 /*
@@ -82,16 +91,16 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
     content: "$";
 }
 
-/* Body/Header stuff */
-body {
-    padding: 0px 30px 30px 20px;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 100;
-}
+ /*Body/Header stuff */
+/*body {*/
+/*    padding: 0px 30px 30px 20px;*/
+/*    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+/*    font-weight: 100;*/
+/*}*/
 
-h1 {
-    font-weight: 100;
-}
+/*h1 {*/
+/*    font-weight: 100;*/
+/*}*/
 
 label {
     color: #aaa;

@@ -16,7 +16,7 @@ import { darkTheme, lightTheme } from "./theme";
 
 const user: User = {
   id: 1,
-  name: 'asdf',
+  name: 'Успеть за 2 дня',
   email: 'asd@asd.asd',
   password: 'asdasd',
   basket: []
