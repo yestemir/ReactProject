@@ -66,7 +66,7 @@ export default function Navbar({curUser, logout}: Props): ReactElement {
             </span>
         }
         return <span onClick={() => logout()}>
-                Logout
+                <Link to='/main'>Logout</Link>
             </span>
     }
 
