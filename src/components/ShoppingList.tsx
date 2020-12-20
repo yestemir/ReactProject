@@ -39,6 +39,10 @@ export default function ShoppingList({ todo, dispatch }: Props): ReactElement {
                         <use xlinkHref="#todo__circle" className="todo__circle" />
                     </svg>
                     <div className="todo__text">{todo.name}</div>
+                    {/*<button*/}
+                    {/*    onClick={(e) =>*/}
+                    {/*        dispatch({ type: Actions.DELETE_TODO, payload: { id: todo.id } })*/}
+                    {/*    }>delete</button>*/}
                 </label>
                 {/*<button*/}
                 {/*    onClick={(e) =>*/}

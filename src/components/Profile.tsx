@@ -1,4 +1,3 @@
-  
 import React, {FormEvent, ReactElement, useReducer, useState} from 'react';
 import { User } from '../database/User';
 import './profile.css';
@@ -81,40 +80,11 @@ function Profile({curUser}: Props): ReactElement {
                 <label htmlFor="name" className="form__label">Products to buy</label>
             </form>
 
-            {/*<form onSubmit={handleSubmit} className="todo-list">*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        value={name}*/}
-            {/*        onChange={(e) => setName(e.target.value)}*/}
-            {/*    />*/}
-            {/*</form>*/}
-
-
-
-            {/*<form onSubmit={handleSubmit}>*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        value={name}*/}
-            {/*        onChange={(e) => setName(e.target.value)}*/}
-            {/*    />*/}
-            {/*</form>*/}
-
             {todos.map((todo) => {
                 return <ShoppingList key={todo.id} todo={todo} dispatch={dispatch} />;
             })}
         </div>
     );
-        // return (
-        // <section id="store" className="store py-5" style={{backgroundColor: "transparent"}}>
-        //     <div className="container">
-        // <div>
-        //     <h5>Name: {curUser.name}</h5>
-        //     <h5>Password: {curUser.password}</h5>
-        //     <h5>Функционал в стадии разработки. Ждите обновлений :)</h5>
-        // </div>
-        //     </div>
-        // </section>
-    // )
     return <></>;
 }
 
