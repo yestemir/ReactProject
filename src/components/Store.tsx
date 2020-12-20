@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import styled from "styled-components";
+import React, {Component, useEffect} from 'react';
 import {recent} from "../database/recent";
 import {Product} from "../database/Product";
 import ProductItem from "./ProductItem";
@@ -9,7 +8,6 @@ import './store.css';
 interface Props {
     item: Product[]
     addItem: (it: Product) => void;
-
 }
 
 interface State {

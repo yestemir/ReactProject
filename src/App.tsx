@@ -13,6 +13,7 @@ import { User } from "./database/User";
 import { Product } from "./database/Product";
 import { ThemeContext, LanguageContext } from "./context";
 import { darkTheme, lightTheme } from "./theme";
+import StoreComponent from "./components/StoreComponent";
 
 const user: User = {
   id: 1,
@@ -65,7 +66,8 @@ function App() {
             {/*<Route path="/store" exact component={Store} />*/}
             <Route exact path="/store">
               <ErrorBoundary>
-              <Store item={products} addItem={addItemToBasket} />
+              {/*<Store item={products} addItem={addItemToBasket} />*/}
+                <StoreComponent fetchUrl="store" addItem={addItemToBasket} />
               </ErrorBoundary>
             </Route>
             {/*<Route path="/cart" exact component={Cart} />*/}
