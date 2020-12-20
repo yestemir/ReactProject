@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import styled from "styled-components";
+import {recent} from "../database/recent";
 import {Product} from "../database/Product";
 import ProductItem from "./ProductItem";
 import RecentlyViewedProducts from "./RecentlyViewedProducts";
-import {recent} from "../database/recent";
+import './store.css';
 
 interface Props {
     item: Product[]

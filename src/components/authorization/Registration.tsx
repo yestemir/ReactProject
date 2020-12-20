@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, {ReactElement, useEffect, useRef} from 'react';
 import { Formik } from "formik";
 import { Link, withRouter } from 'react-router-dom';
 import { User } from '../../database/User';
 import { RouteComponentProps } from 'react-router-dom';
-// import './index.css';
-import Input from "../../shared/Input";
+import './index.css';
+import Input from "../../shared/Input/Input";
 
 interface RegisterFormValues {
     name: string;
@@ -28,6 +28,10 @@ function Registration({
                           history,
                       }: Props): ReactElement {
 //   let user: User = { email: '', id: 0, password: '', name: '' };
+    const email = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+        email.current?.focus();
+    }, []);
 
     const handleSubmit = (values: RegisterFormValues) => {
         let { email, password, name } = values;
@@ -62,7 +66,7 @@ function Registration({
         return errors;
     };
     return (
-        <section id="store" className="store py-5" style={{background: "white"}}>
+        <section id="store" className="store py-5">
             <div className="container" >
         <main className="backg">
             <Formik
@@ -114,39 +118,17 @@ function Registration({
                             placeholder="Your password"
                         />
                         <button
+                            id="btn"
                             className="registerbtn"
                             type="submit"
                             //   onClick={() => registrate(user)}
                             //   onSubmit={() => validateUser(user)}
-                            style={{
-                                border: "2px solid black", borderRadius: "5px",
-                                // border: "0",
-                                backgroundColor: "white",
-                                borderColor: "#4CAF50",
-                                color: "green",
-                                padding: "14px 28px",
-                                width: "100%",
-                                fontSize: "16px",
-                                textAlign: "center",
-                                margin: "5px",
-                                cursor: "pointer"}}
                         >
                             Submit
                         </button>
                         <div className="container signin">
                             <Link to="/">
-                                <button className="cancelbtn" onClick={cancel} type="button" style={{
-                                    border: "2px solid black", borderRadius: "5px",
-                                    // border: "0",
-                                    backgroundColor: "white",
-                                    borderColor: "#8B4513",
-                                    color: "#8B4513",
-                                    padding: "14px 28px",
-                                    fontSize: "16px",
-                                    textAlign: "center",
-                                    width: "100%",
-                                    margin: "5px",
-                                    cursor: "pointer"}}>
+                                <button id ="btn" className="cancelbtn" onClick={cancel} type="button">
                                     Back to the main page
                                 </button>
                             </Link>
@@ -229,3 +211,4 @@ export default withRouter(Registration);
 //         }
 //     }
 // }
+

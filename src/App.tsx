@@ -1,168 +1,163 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, Profiler, useCallback, lazy, Suspense } from "react";
+import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Redirect, BrowserRouter } from "react-router-dom";
-import Main from "./components/Main";
-import Store from "./components/Store";
-import Auth from "./components/authorization/Auth";
-import Registration from "./components/authorization/Registration";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
-// import Profile from "./components/Profile"
 import { products } from "./database/products";
 import { User } from "./database/User";
-import Cart from "./components/Cart";
-import {cart} from "./database/cart";
-import ProductDetails from "./components/ProductDetails";
-import {Product} from "./database/Product";
-import Profile from "./components/Profile";
+import { Product } from "./database/Product";
+import { ThemeContext, LanguageContext } from "./context";
+import { darkTheme, lightTheme } from "./theme";
 
-const defUser = () => {
-    return {
-        id: 1,
-        name: "asd",
-        email: "asd@asd.asd",
-        password: "asd",
-        basket: [],
-    };
-}
+const user: User = {
+  id: 1,
+  name: 'asdf',
+  email: 'asd@asd.asd',
+  password: 'asdasd',
+  basket: []
+};
+
+const Store = lazy(() => import("./components/Store"));
+const Cart = lazy(() => import("./components/Cart"));
+const Auth = lazy(() => import("./components/authorization/Auth"));
+const Registration = lazy(() => import("./components/authorization/Registration"));
+const Main = lazy(() => import("./components/Main"));
+const Profile = lazy(() => import("./components/Profile"));
+const ProductDetails = lazy(() => import("./components/ProductDetails"));
 
 function App() {
-    const [users, setUsers] = useState<User[]>([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [loggedUser, setLoggedUser] = useState<User>(defUser);
-    return (
-                <Router>
-                    <Navbar status={isLoggedIn} curUser={loggedUser} logout={logout} login={login}/>
+  const [users, setUsers] = useState<User[]>([user]);
+  const [loggedUser, setLoggedUser] = useState<User | null>(null);
 
-                    <Switch>
-                        <Route exact path="/">
-                            <Main />
-                        </Route>
-                        <Route exact path="/store">
-                            <Store item={products} addItem={addItemToBasket}/>
-                        </Route>
-                        <Route exact path="/cart">
-                             <Cart user={loggedUser} removeItem={removeItemFromBasket}/>
-                            {() => <h1>CRS world</h1>}
-                        </Route>
-                        <Route
-                            exact
-                            path="/auth"
-                            component={() => <Auth login={authenticateUser} cancel={show} />}
-                            >
-                        </Route>
-                        <Route exact path="/register">
-                            <Registration registrate={createNewUser} cancel={show} />
-                        </Route>
-                        <Route exact path="/main">
-                            <Main />
-                        </Route>
-                        <Route exact path="/profile">
-                            <Profile curUser={loggedUser} />
-                        </Route>
-                        <Route exact path="/items/:id">
-                            {() => <h1>Product Detail</h1>}
-                             <ProductDetails item={products}/>
-                        </Route>
-                    </Switch>
-                </Router>
+  const callbackFunction = (
+      id: string,
+      phase: "mount" | "update",
+      actualDuration: number,
+      baseDuration: number,
+      startTime: number,
+      commitTime: number,
+      interactions: Set<{ id: number; name: string; timestamp: number }>
+  ) => {
+    console.log("Id is :", id);
+    console.log("Phase is :", phase);
+    console.log("Actual Duration is :", actualDuration);
+    console.log("Base Duration is :", baseDuration);
+    console.log("Start Time is :", startTime);
+    console.log("Commit Time is :", commitTime);
+    console.log("Interactions is :", interactions);
+  };
+
+  return (
+    <ThemeContext.Provider value={lightTheme}>
+      <LanguageContext.Provider value="EN">
+        <Router>
+          <Navbar curUser={loggedUser} logout={logout} />
+          <Suspense fallback={<h1>Loading Route ...</h1>}>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/main"/>
+            </Route>
+            {/*<Route path="/store" exact component={Store} />*/}
+            <Route exact path="/store">
+              <ErrorBoundary>
+              <Store item={products} addItem={addItemToBasket} />
+              </ErrorBoundary>
+            </Route>
+            {/*<Route path="/cart" exact component={Cart} />*/}
+            <Route exact path="/cart">
+              <Profiler id="Cart" onRender={callbackFunction}>
+                <Cart user={loggedUser} removeItem={removeItemFromBasket} />
+                {/*<Cart user={loggedUser} />*/}
+              </Profiler>
+            </Route>
+            {/*<Route path="/auth" exact component={Auth} />*/}
+            <Route
+              exact
+              path="/auth">
+              <Auth login={authenticateUser} cancel={show} />
+            </Route>
+            {/*<Route path="/register" exact component={Registration} />*/}
+            <Route exact path="/register">
+              <Registration registrate={createNewUser} cancel={show} />
+            </Route>
+            {/*<Route path="/main" exact component={Main} />*/}
+            <Route exact path="/main">
+              <Main />
+            </Route>
+            {/*<Route path="/profile" exact component={Profile}  />*/}
+            <Route exact path="/profile">
+              <Profile curUser={loggedUser} />
+            </Route>
+            {/*<Route path="/items/:id" exact component={ProductDetails} />*/}
+            <Route exact path="/items/:id">
+              <ErrorBoundary>
+                <ProductDetails item={products} addItem={addItemToBasket}/>
+              </ErrorBoundary>
+            </Route>
+          </Switch>
+          </Suspense>
+        </Router>
+      </LanguageContext.Provider>
+    </ThemeContext.Provider>
+  );
+
+  function createNewUser(user: User) {
+    const checker = users.find((u) => u.email === user.email);
+    if (checker) {
+      return false;
+    }
+    user.id = users.length + 1;
+    setUsers((users) => [...users, user]);
+    console.log(users);
+    return true;
+  }
+
+  function authenticateUser(user: User) {
+    const checker = users.find(
+      (u) => u.email === user.email && u.password == user.password
     );
-
-    function createNewUser(user: User) {
-        const checker = users.find((u) => u.email === user.email);
-        if (checker) {
-            return false;
-        }
-        user.id = users.length + 1;
-        setUsers((users) => [...users, user]);
-        console.log(users);
-        return true;
+    if (!checker) {
+      return false;
     }
+    user = checker;
+    user.basket = [];
+    setLoggedUser(user);
+    console.log(loggedUser);
+    return true;
+  }
 
-    function authenticateUser(user: User) {
-        const checker = users.find((u) => u.email === user.email && u.password == user.password);
-        if (!checker) {
-            return false;
-        }
-        user = checker;
-        setIsLoggedIn(true);
-        setLoggedUser(user);
-        console.log(loggedUser);
-        console.log(isLoggedIn);
-        return true;
-    }
+  function logout() {
+    setLoggedUser(null);
+  }
 
-    function logout() {
-        setIsLoggedIn(false);
-    }
+  function show() {
+    return <Redirect to="/" />;
+  }
 
-    function login() {
-        setIsLoggedIn(true);
+  function addItemToBasket(product: Product) {
+    if (loggedUser) {
+      product.id = loggedUser.basket.length + 1;
+      loggedUser.basket.push(product);
+    }else{
+      throw new Error("You are not logged in");
     }
+  }
 
-    function show() {
-        return <Redirect to="/" />;
-    }
+  function removeItemFromBasket(id: number) {
+    if (loggedUser) {
+      console.log('Updated');
+      const basket = loggedUser.basket.filter((item, index) => {
+        return id !== index;
+      });
 
-    function addItemToBasket(product: Product) {
-        product.id = loggedUser.basket.length + 1;
-        loggedUser.basket.push(product);
+      setLoggedUser({...loggedUser, basket});
     }
-
-    function removeItemFromBasket(id: number) {
-        loggedUser.basket = loggedUser.basket.filter((item, index) => {
-            return id !== index;
-        })
-    }
+  }
 }
 
 export default App;
-
-
-
-
-// import React, {useContext} from 'react';
-// import './App.css';
-// import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-// import Main from "./components/Main";
-// import Store from "./components/Store";
-// import Auth from "./components/authorization/Auth";
-// import Registration from "./components/authorization/Registration";
-// import Navbar from "./components/Navbar";
-// import {products} from "./database/products"
-// import ProductDetails from "./components/ProductDetails";
-// import Cart from "./components/Cart";
-// import {cart} from "./database/cart";
-// import {ThemeContext} from "../src/components/contexts/ThemeProvider";
-// import {LanguageContext} from "./components/contexts/LanguageProvider";
-//
-// function App() {
-//     const { theme, toggleTheme } = useContext(ThemeContext);
-//     const { language, toggleLanguage } = useContext(LanguageContext);
-//   return (
-//       <Router>
-//           <Navbar />
-//           <div>
-//               <button onClick={toggleLanguage}>
-//                   Switch to {language === 'EN' ? 'RU' : 'EN'} mode
-//               </button>
-//           </div>
-//           <div>
-//           <button onClick={toggleTheme}>
-//               Switch to {theme === 'light' ? 'dark' : 'light'} mode
-//           </button>
-//           </div>
-//           <Switch>
-//               <Route exact path='/'><Main /></Route>
-//               <Route exact path='/store'><Store item={products}/></Route>
-//               <Route exact path='/auth'><Auth /></Route>
-//               <Route exact path='/register'><Registration /></Route>
-//               <Route exact path='/items/:id'><ProductDetails item={products}/></Route>
-//               <Route exact path='/cart'><Cart items={cart}/></Route>
-//           </Switch>
-//       </Router>
-//
-//   );
-// }
-//
-// export default App;

@@ -1,0 +1,33 @@
+#btn1{
+    /*border: 2px solid black;*/
+    /*border-radius: 5px;*/
+    /*background-color: #E9967A;*/
+    /*border-color: #e9967a;*/
+    /*color: #474739;*/
+    /*padding: 14px 28px;*/
+    /*align-content: center;*/
+    font-size: 15px;
+    /*width: 100%;*/
+    /*cursor: pointer;*/
+
+    /*height: 10px;*/
+    padding: 15px 25px;
+    /*font-size: 24px;*/
+    /*text-align: center;*/
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #e9967a;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #c6baba;
+}
+
+#btn1:hover {background-color: #ff5e29
+}
+
+#btn1:active {
+    background-color: #fda57e;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

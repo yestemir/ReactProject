@@ -3,44 +3,44 @@ import {BrowserRouter as Router, Link} from "react-router-dom";
 import { User } from '../database/User';
 import {ThemeContext} from "./contexts/ThemeProvider";
 import {LanguageContext} from "./contexts/LanguageProvider";
+import './navbar.css';
 
 interface Props {
-    status: boolean;
-    curUser: User;
+    curUser: User | null;
     logout: () => void;
-    login: () => void;
 }
 
-export default function Navbar({status, curUser, logout, login}: Props): ReactElement {
+export default function Navbar({curUser, logout}: Props): ReactElement {
 
     const { theme, toggleTheme } = useContext(ThemeContext);
     const { language, toggleLanguage } = useContext(LanguageContext);
 
-    const showCart = (stat: boolean) => {
-        if (stat) {
-            return (<span>
+    const showCart = (user : User | null) => {
+        if (user) {
+            return <span>
                 <Link to='/cart'>Cart</Link>
-            </span>)
+            </span>
         }
     }
-    const showLogout = (stat: boolean) => {
-        if (stat) {
+
+    const showLogout = (user : User | null) => {
+        if (user) {
             return <span onClick={() => logout()}>
                 Logout
             </span>
         }
     }
 
-    const showLogin = (stat: boolean) => {
-        if (!stat) {
+    const showLogin = (user: User | null) => {
+        if (!user) {
             return <span>
                 <Link to='/auth'> Login </Link>
             </span>
         }
     }
 
-    const showReg = (stat: boolean) => {
-        if (!stat) {
+    const showReg = (user: User | null) => {
+        if (!user) {
             return <span>
                 <Link to='/register'> Register </Link>
             </span>
@@ -48,7 +48,7 @@ export default function Navbar({status, curUser, logout, login}: Props): ReactEl
     }
 
     return (
-        <nav className="navbar navbar-expand-lg px-4 sticky ">
+        <nav className="navbar navbar-expand-lg px-4 sticky" id="nav">
         <div className='container'>
             <div className="collapse navbar-collapse navbar-nav mx-auto text-capitalize" id="myNav">
                 <a className="navbar-brand" href="#"><img src="img/logo.svg" alt="" /></a>
@@ -68,50 +68,28 @@ export default function Navbar({status, curUser, logout, login}: Props): ReactEl
                 <div id="cart-info" className="nav-info align-items-center cart-info d-flex justify-content-between
                 border-0">
                     <span className="cart-info__icon mr-lg-3">
-                        {showLogin(status)}
+                        {showLogin(curUser)}
                     </span>
                 </div>
                 <div id="cart-info" className="nav-info align-items-center cart-info d-flex justify-content-between
                 border-0">
                     <span className="cart-info__icon mr-lg-3">
-                        {showReg(status)}
+                        {showReg(curUser)}
                     </span>
                 </div>
                 <div id="cart-info" className="nav-info align-items-center cart-info d-flex justify-content-between
                 border-0">
-                    {showCart(status)}
+                    {showCart(curUser)}
                 </div>
                 <div id="cart-info" className="nav-info align-items-center cart-info d-flex justify-content-between
                 border-0">
-                    {showLogout(status)}
+                    {showLogout(curUser)}
                 </div>
 
-                    <div onClick={toggleLanguage} style={{
-                        // border: "2px solid black", borderRadius: "5px",
-                        border: "0",
-                        backgroundColor: "white",
-                        // borderColor: "#4CAF50",
-                        color: "green",
-                        padding: "14px 28px",
-                        fontSize: "16px",
-                        width: "10%",
-                        textAlign: "center",
-                        margin: "5px",
-                        cursor: "pointer"}}>
+                    <div id="oncl" onClick={toggleLanguage}>
                         {language === 'EN' ? 'RU' : 'EN'}
                     </div>
-                    <div onClick={toggleTheme} className="cart-info__icon mr-lg-3" style={{
-                                // border: "2px solid black", borderRadius: "5px",
-                                border: "0",
-                                backgroundColor: "white",
-                                // borderColor: "#4CAF50",
-                                color: "green",
-                                padding: "14px 28px",
-                                fontSize: "16px",
-                                width: "10%",
-                                textAlign: "center",
-                                margin: "5px",
-                                cursor: "pointer"}}>
+                    <div id="oncl" onClick={toggleTheme} className="cart-info__icon mr-lg-3">
                         {theme === 'light' ? 'dark' : 'light'}
                     </div>
             </div>
@@ -119,29 +97,3 @@ export default function Navbar({status, curUser, logout, login}: Props): ReactEl
         </nav>
     )
 }
-
-// import React, {ReactElement} from 'react';
-// import {Link} from "react-router-dom";
-//
-// interface Props {
-//
-// }
-//
-// export default function Navbar({}: Props): ReactElement {
-//     return (
-//         <div className='container'>
-//             <div className='leftSide'>
-//                 <Link to='/store'> Products </Link>
-//             </div>
-//             <div className='rightSide'>
-//                 <Link to='/auth'> Login </Link>
-//                 <span>
-//                     <Link to='/register'> Register </Link>
-//                 </span>
-//                 <span>
-//                     <Link to='/cart'>Cart</Link>
-//                 </span>
-//             </div>
-//         </div>
-//     )
-// }

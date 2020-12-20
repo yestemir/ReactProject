@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from "react-router-dom";
+import "./main.css"
+
 
 interface Props {
 
@@ -17,8 +19,9 @@ export default class Main extends Component<Props, State> {
             <div className="container-fluid">
                 <div className="row max-height justify-content-center align-items-center">
                     <div className="col-10 mx-auto banner text-center">
-                        <h1 className="text-capitalize">welcome to <strong className="banner-title ">Успеть за 5 дней</strong>
+                        <h1 className="text"> Welcome to <strong className="banner-title "> я на диете :)</strong>
                         </h1>
+                        <h5>Ешь, дорогая, всё, что ты хочешь. Если тебе кто-то скажет, что ты толстая, съешь и его.</h5>
                         <Link to='/store' className="btn banner-link text-uppercase my-2">explore</Link>
                     </div>
                     <div id="cart" className="cart">

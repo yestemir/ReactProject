@@ -1,0 +1,15 @@
+#oncl{
+    border: 0;
+    background-color: white;
+    color: green;
+    padding: 14px 28px;
+    font-size: 16px;
+    width: 10%;
+    text-align: center;
+    margin: 5px;
+    cursor: pointer;
+}
+
+/*#nav {*/
+/*    position: fixed;*/
+/*}*/
