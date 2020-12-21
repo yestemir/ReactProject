@@ -236,3 +236,17 @@
         top: -85px;
     }
 }
+
+
+.commets {
+    width: 50%;
+    margin-left: 15%;
+    margin-top: 5%;
+    /*border-bottom-color: #4e555b;*/
+    /*border-bottom: 1px solid;*/
+}
+
+.CmtText{
+    border-bottom-color: #4e555b;
+    border-bottom: 2px solid;
+}

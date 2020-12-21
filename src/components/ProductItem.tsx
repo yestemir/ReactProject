@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Product } from "../database/Product";
 import { recent } from "../database/recent";
 import './productItem.css';
+import ItemComments from "./ItemComments";
 
 interface Props {
   item: Product;
@@ -66,11 +67,11 @@ export default class ProductItem extends Component<Props, State> {
                 >
                   To Cart
                 </button>
-                <button>
-                  <Link to={"/items/" + this.state.item.id + "/comments"} onClick={() => console.log(this.state.item.id)}>
-                    Post Comment
-                  </Link>
-                </button>
+                {/*<button>*/}
+                {/*  <Link to={"/items/" + this.state.item.id + "/comments"} onClick={() => console.log(this.state.item.id)}>*/}
+                {/*    Post Comment*/}
+                {/*  </Link>*/}
+                {/*</button>*/}
               </div>
             </div>
           </div>

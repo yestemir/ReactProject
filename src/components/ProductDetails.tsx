@@ -1,15 +1,18 @@
 import React, { ReactElement, useState } from "react";
 import { Product } from "../database/Product";
-import { useRouteMatch } from "react-router-dom";
+import {Link, useRouteMatch} from "react-router-dom";
 import { products } from "../database/products";
 import "./productDetail.css";
+import {User} from "../database/User";
+import ItemComments from "./ItemComments";
 
 interface Props {
   item: Product[];
   addItem: (it: Product) => void;
+  curUser: User | null;
 }
 
-export default function ProductDetails({ addItem }: Props): ReactElement {
+export default function ProductDetails({ addItem, curUser }: Props): ReactElement {
   const match = useRouteMatch<{ id: string }>();
   const item =
     products.find((product) => product.id === parseInt(match.params.id)) ||
@@ -62,7 +65,17 @@ export default function ProductDetails({ addItem }: Props): ReactElement {
               Add to cart
             </button>
           </div>
+
+          {/*<button>*/}
+          {/*  <Link to={"/items/" + item.id + "/comments"} onClick={() => console.log(item.id)}>*/}
+          {/*    Post Comment*/}
+          {/*  </Link>*/}
+          {/*</button>*/}
         </div>
+      </div>
+      <div className="commets">
+        <h1 className="CmtText">Comments</h1>
+        <ItemComments curUser={curUser} />
       </div>
     </>
   );

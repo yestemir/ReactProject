@@ -16,10 +16,10 @@ import { darkTheme, lightTheme } from "./theme";
 import StoreComponent from "./components/StoreComponent";
 
 const user1: User = {
-  id: 1,
-  name: "Dino",
-  email: "test@gmail.com",
-  password: "aaa",
+  id: 6,
+  name: "Успеть за 2 дня",
+  email: "asd@asd.asd",
+  password: "asdasd",
   basket: [],
 };
 
@@ -115,12 +115,12 @@ function App() {
               {/*<Route path="/items/:id" exact component={ProductDetails} />*/}
               <Route exact path="/items/:id">
                 <ErrorBoundary>
-                  <ProductDetails item={products} addItem={addItemToBasket} />
+                  <ProductDetails item={products} addItem={addItemToBasket} curUser={loggedUser}/>
                 </ErrorBoundary>
               </Route>
-              <Route exact path="/items/:id/comments">
-                <ItemComments curUser={loggedUser} />
-              </Route>
+              {/*<Route exact path="/items/:id/comments">*/}
+              {/*  <ItemComments curUser={loggedUser} />*/}
+              {/*</Route>*/}
             </Switch>
           </Suspense>
         </Router>

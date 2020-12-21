@@ -9,7 +9,7 @@ export interface Comment {
 export const comments: Comment[] = [
     {
         author: {
-            id: 1,
+            id: 2,
             name: "Dino",
             email: "test@gmail.com",
             password: "aaa",
@@ -20,7 +20,7 @@ export const comments: Comment[] = [
     },
     {
         author: {
-            id: 2,
+            id: 1,
             name: "U.",
             email: "test2@gmail.com",
             password: "aaa",
@@ -28,5 +28,16 @@ export const comments: Comment[] = [
         },
         text: "Perfect!",
         productId: 2,
+    },
+    {
+        author: {
+            id: 1,
+            name: "U.",
+            email: "test2@gmail.com",
+            password: "aaa",
+            basket: []
+        },
+        text: "Best of the best!",
+        productId: 1,
     }
 ]

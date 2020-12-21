@@ -1,0 +1,46 @@
+.commentCl {
+    margin-top: 2%;
+    margin-bottom: 5%;
+    /*position: relative;*/
+    /*display: inline;*/
+    display: block;
+    /*float: left*/
+    border-bottom: 1px solid;
+}
+
+#imag {
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid;
+    margin-bottom: 2%;
+}
+
+#textt {
+    border: 1px solid red;
+    margin:10px;
+    /*float:left;!*Add float left*!*/
+    margin :10px;
+    display: inline-block;
+    border: 1px solid;
+    margin-left: 10%;
+}
+
+#a{
+    /*display: block;*/
+    margin-left: 2%;
+}
+
+#inpt {
+    padding: 20px 10px;
+    line-height: 10%;
+}
+
+
+#pst {
+
+}
+/*#a{*/
+/*    display: block;*/
+/*}*/
