@@ -64,7 +64,7 @@ function Profile({curUser}: Props): ReactElement {
         <div id="first">
             <div className="card-wrap">
                 <div className="profile_pic-wrap">
-                    <img src="https://images.vexels.com/media/users/3/135606/isolated/preview/b474b5c5c7ac007448c0111ac3a3eb29-cat-face-round-icon-by-vexels.png" alt="" />
+                    <img src="https://st.depositphotos.com/1808169/1392/v/600/depositphotos_13925759-stock-illustration-cartoon-donut-illustration.jpg" alt="" />
                 </div>
                 <div className="info-wrap">
                     <h1 className="user-name">{curUser.name}</h1>
