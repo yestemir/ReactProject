@@ -28,7 +28,7 @@ export default class ProductItem extends Component<Props, State> {
       price: this.state.item.price,
       image: this.state.item.image,
       description: this.state.item.description,
-      brand: this.state.item.brand,
+      brand: this.state.item.brand
     };
     return (
       <React.Fragment>
@@ -65,6 +65,11 @@ export default class ProductItem extends Component<Props, State> {
                   onClick={() => this.props.addItem(item)}
                 >
                   To Cart
+                </button>
+                <button>
+                  <Link to={"/items/" + this.state.item.id + "/comments"} onClick={() => console.log(this.state.item.id)}>
+                    Post Comment
+                  </Link>
                 </button>
               </div>
             </div>
