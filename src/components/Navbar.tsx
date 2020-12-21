@@ -70,9 +70,15 @@ export default function Navbar({ curUser, logout }: Props): ReactElement {
       return null;
     }
     return (
-      <span>
+        <div
+            id="cart-info"
+            className="nav-info align-items-center cart-info d-flex justify-content-between
+                border-0"
+        ><span>
         <Link to="/orders">Orders</Link>
       </span>
+        </div>
+
     );
   };
 
@@ -120,14 +126,7 @@ export default function Navbar({ curUser, logout }: Props): ReactElement {
         </div>
 
         <div className="navbar-nav text-capitalize">
-          <div
-            id="cart-info"
-            className="nav-info align-items-center cart-info d-flex justify-content-between
-                border-0"
-          >
-            {/*<span className="cart-info__icon mr-lg-3">*/}
-            <span>{showOrders(curUser)}</span>
-          </div>
+          {showOrders(curUser)}
           <div
             id="cart-info"
             className="nav-info align-items-center cart-info d-flex justify-content-between
