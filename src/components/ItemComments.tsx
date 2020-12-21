@@ -12,9 +12,11 @@ interface Props {
   comments: Comment[];
   setComments: (comments: Comment[]) => void;
   curUser: User | null;
+  // addComment: (comment: Comment) => void;
+  // comments: Comment[];
 }
 
-function ItemComments({ comments, setComments, curUser }: Props): ReactElement {
+function ItemComments({ comments, setComments, curUser, /*addComment, comments*/}: Props): ReactElement {
   const match = useRouteMatch<{ id: string }>();
   const [text, setText] = useState("");
   const [num, setNum] =useState(0);
@@ -45,6 +47,7 @@ function ItemComments({ comments, setComments, curUser }: Props): ReactElement {
         productId: product.id,
       };
       setComments([...comments, newComment]);
+      // addComment(newComment);
       setText("");
     }
   };
@@ -98,3 +101,5 @@ function mapStateToProps(state: any) {
 }
 
 export default connect(mapStateToProps, { setComments })(ItemComments);
+
+// export default ItemComments;

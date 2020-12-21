@@ -1,5 +1,6 @@
-import React, { ReactElement, useState } from "react";
+import React, { Component, ReactElement, useState } from "react";
 import { Product } from "../database/Product";
+import { Comment } from "../database/Comment";
 import {Link, useRouteMatch} from "react-router-dom";
 import { products } from "../database/products";
 import "./productDetail.css";
@@ -10,9 +11,11 @@ interface Props {
   item: Product[];
   addItem: (it: Product) => void;
   curUser: User | null;
+  // addComment: (comment: Comment) => void;
+  // comments: Comment[];
 }
 
-export default function ProductDetails({ addItem, curUser }: Props): ReactElement {
+export default function ProductDetails({ addItem, curUser, /*addComment, comments*/}: Props): ReactElement {
   const match = useRouteMatch<{ id: string }>();
   const item =
     products.find((product) => product.id === parseInt(match.params.id)) ||
@@ -75,7 +78,7 @@ export default function ProductDetails({ addItem, curUser }: Props): ReactElemen
       </div>
       <div className="commets">
         <h1 className="CmtText">Comments</h1>
-        <ItemComments curUser={curUser} />
+        <ItemComments curUser={curUser} /*addComment={addComment} comments={comments}*//>
       </div>
     </>
   );

@@ -11,25 +11,10 @@ import Navbar from "./components/Navbar";
 import { products } from "./database/products";
 import { User } from "./database/User";
 import { Product } from "./database/Product";
+import { Comment } from './database/Comment';
 import { ThemeContext, LanguageContext } from "./context";
 import { darkTheme, lightTheme } from "./theme";
 import StoreComponent from "./components/StoreComponent";
-
-const user1: User = {
-  id: 6,
-  name: "Успеть за 2 дня",
-  email: "asd@asd.asd",
-  password: "asdasd",
-  basket: [],
-};
-
-const user2: User = {
-  id: 2,
-  name: "U.",
-  email: "test2@gmail.com",
-  password: "aaa",
-  basket: [],
-};
 
 const Store = lazy(() => import("./components/Store"));
 const Cart = lazy(() => import("./components/Cart"));
@@ -44,8 +29,13 @@ const Orders = lazy(() => import("./components/Orders"));
 const ItemComments = lazy(() => import("./components/ItemComments"));
 
 function App() {
-  const [users, setUsers] = useState<User[]>([user1, user2]);
+  const [users, setUsers] = useState<User[]>(
+    localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users') + '') : []
+  );
   const [loggedUser, setLoggedUser] = useState<User | null>(null);
+  const [comments, setComments] = useState<Comment[]>(
+    localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments') + '') : []
+  );
 
   const callbackFunction = (
     id: string,
@@ -115,7 +105,8 @@ function App() {
               {/*<Route path="/items/:id" exact component={ProductDetails} />*/}
               <Route exact path="/items/:id">
                 <ErrorBoundary>
-                  <ProductDetails item={products} addItem={addItemToBasket} curUser={loggedUser}/>
+                  <ProductDetails item={products} addItem={addItemToBasket} curUser={loggedUser} 
+                    /*addComment={addComment} comments={comments}*//>
                 </ErrorBoundary>
               </Route>
               {/*<Route exact path="/items/:id/comments">*/}
@@ -135,6 +126,7 @@ function App() {
     }
     user.id = users.length + 1;
     setUsers((users) => [...users, user]);
+    localStorage.setItem('users', JSON.stringify(users));
     console.log(users);
     return true;
   }
@@ -189,6 +181,10 @@ function App() {
       setLoggedUser({ ...loggedUser, basket });
     }
   }
+
+  // function addComment(comment: Comment) {
+  //   setComments((comments) => [...comments, comment]);
+  // }
 }
 
 export default App;
