@@ -15,11 +15,19 @@ import { ThemeContext, LanguageContext } from "./context";
 import { darkTheme, lightTheme } from "./theme";
 import StoreComponent from "./components/StoreComponent";
 
-const user: User = {
+const user1: User = {
   id: 1,
-  name: "Успеть за 2 дня",
-  email: "asd@asd.asd",
-  password: "asdasd",
+  name: "Dino",
+  email: "test@gmail.com",
+  password: "aaa",
+  basket: [],
+};
+
+const user2: User = {
+  id: 2,
+  name: "U.",
+  email: "test2@gmail.com",
+  password: "aaa",
   basket: [],
 };
 
@@ -33,9 +41,10 @@ const Main = lazy(() => import("./components/Main"));
 const Profile = lazy(() => import("./components/Profile"));
 const ProductDetails = lazy(() => import("./components/ProductDetails"));
 const Orders = lazy(() => import("./components/Orders"));
+const ItemComments = lazy(() => import("./components/ItemComments"));
 
 function App() {
-  const [users, setUsers] = useState<User[]>([user]);
+  const [users, setUsers] = useState<User[]>([user1, user2]);
   const [loggedUser, setLoggedUser] = useState<User | null>(null);
 
   const callbackFunction = (
@@ -76,7 +85,11 @@ function App() {
               {/*<Route path="/cart" exact component={Cart} />*/}
               <Route exact path="/cart">
                 <Profiler id="Cart" onRender={callbackFunction}>
-                  <Cart user={loggedUser} removeItem={removeItemFromBasket} clearBasket={clearBasket}/>
+                  <Cart
+                    user={loggedUser}
+                    removeItem={removeItemFromBasket}
+                    clearBasket={clearBasket}
+                  />
                   {/*<Cart user={loggedUser} />*/}
                 </Profiler>
               </Route>
@@ -104,6 +117,9 @@ function App() {
                 <ErrorBoundary>
                   <ProductDetails item={products} addItem={addItemToBasket} />
                 </ErrorBoundary>
+              </Route>
+              <Route exact path="/items/:id/comments">
+                <ItemComments curUser={loggedUser} />
               </Route>
             </Switch>
           </Suspense>
