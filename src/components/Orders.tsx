@@ -2,6 +2,7 @@ import React, {ReactElement, Fragment, useState} from "react";
 import { Order } from "../database/Order";
 import { connect } from "react-redux";
 import "./orders.css";
+import Confetti from "reactfitti";
 
 interface Props {
   orders: Order[];
@@ -12,6 +13,7 @@ function Orders({ orders }: Props): ReactElement {
 
   return (
       <div className="list">
+        <Confetti />
         <div className="heading">
           <h4 id="ordTitle">Order List</h4>
           <i className="fas fa-ellipsis-h" />
