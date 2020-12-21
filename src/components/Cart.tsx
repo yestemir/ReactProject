@@ -159,15 +159,17 @@ function Cart({
   );
 }
 
-function mapStateToProps(state: any) {
-  return {
-    orders: state.orders.orders,
-  };
-}
+// function mapStateToProps(state: any) {
+//   return {
+//     orders: state.orders.orders,
+//   };
+// }
 
-export default connect(mapStateToProps, { setOrders })(
-  logProps(Cart as React.FunctionComponent)
-);
+// export default connect(mapStateToProps, { setOrders })(
+//   logProps(Cart as React.FunctionComponent)
+// );
+
+export default logProps(Cart as React.FunctionComponent)
 
 // <>
 //   <section id="store" className="store py-5">
