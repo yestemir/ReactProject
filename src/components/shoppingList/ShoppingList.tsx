@@ -1,5 +1,5 @@
 import React, { Dispatch, ReactElement } from "react";
-import { Action, Actions, ITodo } from "./Profile";
+import { Action, Actions, ITodo } from "../profile/Profile";
 import './shoppingList.css';
 
 interface Props {

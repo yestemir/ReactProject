@@ -6,13 +6,13 @@ import React, {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
-import logProps from "../shared/PropsLogger";
-import { User } from "../database/User";
+import logProps from "../../shared/PropsLogger";
+import { User } from "../../database/User";
 import "./cart.css";
-import { Product } from "../database/Product";
+import { Product } from "../../database/Product";
 import { connect } from "react-redux";
-import { setOrders } from "../store/actions/orders.actions";
-import { Order } from "../database/Order";
+import { setOrders } from "../../store/actions/orders.actions";
+import { Order } from "../../database/Order";
 interface Props {
   user: User | null;
   removeItem: (index: number) => void;
@@ -159,17 +159,17 @@ function Cart({
   );
 }
 
-// function mapStateToProps(state: any) {
-//   return {
-//     orders: state.orders.orders,
-//   };
-// }
+function mapStateToProps(state: any) {
+  return {
+    orders: state.orders.orders,
+  };
+}
 
-// export default connect(mapStateToProps, { setOrders })(
-//   logProps(Cart as React.FunctionComponent)
-// );
+export default connect(mapStateToProps, { setOrders })(
+  logProps(Cart as React.FunctionComponent)
+);
 
-export default logProps(Cart as React.FunctionComponent)
+// export default logProps(Cart as React.FunctionComponent)
 
 // <>
 //   <section id="store" className="store py-5">

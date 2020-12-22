@@ -1,8 +1,8 @@
 import React, { ReactElement, useContext } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { User } from "../database/User";
-import { ThemeContext } from "./contexts/ThemeProvider";
-import { LanguageContext } from "./contexts/LanguageProvider";
+import { User } from "../../database/User";
+import { ThemeContext } from "../contexts/ThemeProvider";
+import { LanguageContext } from "../contexts/LanguageProvider";
 import "./navbar.css";
 
 interface Props {

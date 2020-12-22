@@ -1,11 +1,11 @@
 import React, { Component, ReactElement, useState } from "react";
-import { Product } from "../database/Product";
-import { Comment } from "../database/Comment";
+import { Product } from "../../database/Product";
+import { Comment } from "../../database/Comment";
 import {Link, useRouteMatch} from "react-router-dom";
-import { products } from "../database/products";
+import { products } from "../../database/products";
 import "./productDetail.css";
-import {User} from "../database/User";
-import ItemComments from "./ItemComments";
+import {User} from "../../database/User";
+import ItemComments from "../comments/ItemComments";
 
 interface Props {
   item: Product[];

@@ -1,7 +1,7 @@
 import React, {FormEvent, ReactElement, useReducer, useState} from 'react';
-import { User } from '../database/User';
+import { User } from '../../database/User';
 import './profile.css';
-import ShoppingList from "./ShoppingList";
+import ShoppingList from "../shoppingList/ShoppingList";
 
 interface Props {
     curUser: User | null;

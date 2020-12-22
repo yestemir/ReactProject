@@ -1,5 +1,5 @@
 import React, {ReactElement, Fragment, useState} from "react";
-import { Order } from "../database/Order";
+import { Order } from "../../database/Order";
 import { connect } from "react-redux";
 import "./orders.css";
 import Confetti from "reactfitti";

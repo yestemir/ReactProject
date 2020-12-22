@@ -1,10 +1,10 @@
 import React, { Fragment, ReactElement, useEffect, useState } from "react";
-import axios from "../api/axios";
-import {Product} from "../database/Product";
-import ProductItem from "./ProductItem";
-import RecentlyViewedProducts from "./RecentlyViewedProducts";
-import {recent} from "../database/recent";
-import { getProducts } from '../api/products';
+import axios from "../../api/axios";
+import {Product} from "../../database/Product";
+import ProductItem from "../products/ProductItem";
+import RecentlyViewedProducts from "../recentlyViewedProducts/RecentlyViewedProducts";
+import {recent} from "../../database/recent";
+import { getProducts } from '../../api/products';
 import './store.css';
 
 interface Props {

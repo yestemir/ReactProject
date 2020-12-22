@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Product } from "../database/Product";
-import { recent } from "../database/recent";
+import { Product } from "../../database/Product";
+import { recent } from "../../database/recent";
 import './productItem.css';
-import ItemComments from "./ItemComments";
+import ItemComments from "../comments/ItemComments";
 
 interface Props {
   item: Product;

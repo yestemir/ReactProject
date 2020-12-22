@@ -1,11 +1,11 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouteMatch } from "react-router-dom";
-import { products } from "../database/products";
-import { setComments } from "../store/actions/comments.actions";
-import Input from "../shared/Input/Input";
-import { Comment } from "../database/Comment";
-import { User } from "../database/User";
+import { products } from "../../database/products";
+import { setComments } from "../../store/actions/comments.actions";
+import Input from "../../shared/Input/Input";
+import { Comment } from "../../database/Comment";
+import { User } from "../../database/User";
 import './ItemComments.css'
 
 interface Props {

@@ -1,8 +1,8 @@
   
 import React, {ReactElement, useEffect, useState} from 'react'
-import {Product} from "../database/Product";
-import ProductItem from "./ProductItem";
-import {recent} from "../database/recent";
+import {Product} from "../../database/Product";
+import ProductItem from "../products/ProductItem";
+import {recent} from "../../database/recent";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 

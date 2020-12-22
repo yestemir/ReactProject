@@ -1,8 +1,8 @@
 import React, {Component, useEffect} from 'react';
-import {recent} from "../database/recent";
-import {Product} from "../database/Product";
-import ProductItem from "./ProductItem";
-import RecentlyViewedProducts from "./RecentlyViewedProducts";
+import {recent} from "../../database/recent";
+import {Product} from "../../database/Product";
+import ProductItem from "../products/ProductItem";
+import RecentlyViewedProducts from "../recentlyViewedProducts/RecentlyViewedProducts";
 import './store.css';
 
 interface Props {

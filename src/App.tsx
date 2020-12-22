@@ -1,5 +1,5 @@
 import React, { useState, Profiler, useCallback, lazy, Suspense } from "react";
-import ErrorBoundary from "./components/ErrorBoundary";
+import ErrorBoundary from "./components/errorBoundary/ErrorBoundary";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -7,26 +7,26 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import { products } from "./database/products";
 import { User } from "./database/User";
 import { Product } from "./database/Product";
 import { Comment } from './database/Comment';
 import { ThemeContext, LanguageContext } from "./context";
 import { darkTheme, lightTheme } from "./theme";
-import StoreComponent from "./components/StoreComponent";
+import StoreComponent from "./components/store/StoreComponent";
 
-const Store = lazy(() => import("./components/Store"));
-const Cart = lazy(() => import("./components/Cart"));
+const Store = lazy(() => import("./components/store/Store"));
+const Cart = lazy(() => import("./components/cart/Cart"));
 const Auth = lazy(() => import("./components/authorization/Auth"));
 const Registration = lazy(
   () => import("./components/authorization/Registration")
 );
-const Main = lazy(() => import("./components/Main"));
-const Profile = lazy(() => import("./components/Profile"));
-const ProductDetails = lazy(() => import("./components/ProductDetails"));
-const Orders = lazy(() => import("./components/Orders"));
-const ItemComments = lazy(() => import("./components/ItemComments"));
+const Main = lazy(() => import("./components/main/Main"));
+const Profile = lazy(() => import("./components/profile/Profile"));
+const ProductDetails = lazy(() => import("./components/products/ProductDetails"));
+const Orders = lazy(() => import("./components/orders/Orders"));
+const ItemComments = lazy(() => import("./components/comments/ItemComments"));
 
 function App() {
   const [users, setUsers] = useState<User[]>(
